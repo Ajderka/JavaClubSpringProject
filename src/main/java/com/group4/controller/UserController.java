@@ -37,22 +37,22 @@ public class UserController {
         if (result.hasErrors()){
             return "create-user";
         }
-        userService.saveUser(user);
+        userService.addUser(user);
         return "redirect:/users";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteById(id);
+        userService.removeUser(id);
         return "redirect:/users";
     }
 
-//    @GetMapping("/user-update/{id}")
-//    public String updateUserForm(@PathVariable("id") int id, Model model) {
-//        User user = userService.findById(id);
-//        model.addAttribute("user", user);
-//        return "update-user";
-//    }
+    @GetMapping("/user-update/{id}")
+    public String updateUserForm(@PathVariable("id") int id, Model model) {
+        User user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "update-user";
+    }
 //
 //    @PostMapping("/user-update")
 //    public String updateUser(User user) {
